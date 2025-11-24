@@ -111,7 +111,10 @@ vim.opt.number = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
-
+vim.opt.tabstop = 4 -- Size of a hard tabstop
+vim.opt.shiftwidth = 4 -- Size of an indentation
+vim.opt.softtabstop = 4 -- Number of spaces a <Tab> counts for
+vim.opt.expandtab = true -- Always uses spaces instead of tab characters
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
@@ -150,7 +153,7 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
+vim.opt.list = false
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
@@ -738,8 +741,14 @@ require('lazy').setup({
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
+        cpp = { 'clang_format' },
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      },
+      formatters = {
+        clang_format = {
+          args = { '--style={BasedOnStyle: LLVM, IndentWidth: 4, TabWidth: 4, UseTab: Always}' },
+        },
       },
     },
   },
